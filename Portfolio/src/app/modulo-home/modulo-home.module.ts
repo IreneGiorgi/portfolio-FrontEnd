@@ -10,6 +10,9 @@ import { BannerComponent } from './banner/banner.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    BannerComponent, CommonModule
   ]
 })
 export class ModuloHomeModule { }

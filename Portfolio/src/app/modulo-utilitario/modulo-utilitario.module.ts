@@ -12,6 +12,11 @@ import { PiePaginaComponent } from './pie-pagina/pie-pagina.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports:[
+    BarraRedesComponent,
+    PiePaginaComponent,
+    CommonModule
   ]
 })
 export class ModuloUtilitarioModule { }

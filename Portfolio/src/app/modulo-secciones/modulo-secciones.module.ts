@@ -14,6 +14,9 @@ import { SeccionComponent } from './seccion/seccion.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    SeccionComponent, CommonModule
   ]
 })
 export class ModuloSeccionesModule { }
