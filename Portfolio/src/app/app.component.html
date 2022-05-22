@@ -1,26 +1,29 @@
 <router-outlet></router-outlet>
 
-<div class="row">
-  <div class="col-lg-12">
-    <a name="up"></a>
-    <app-banner></app-banner>
+<div class="container">
+  <a name="up"></a>
+  <div class="row">
+    <div class="col-lg-12">
+      <app-barra-redes></app-barra-redes>
+    </div>
   </div>
-</div>
 
-<div class="row">
-  <div class="col-lg-12">
-    <app-barra-redes></app-barra-redes>
+  <div class="row">
+    <div class="col-lg-12">
+      <app-banner></app-banner>
+    </div>
   </div>
-</div>
+  
 
-<div class="row">
-  <div class="col-lg-8">
-    <app-seccion></app-seccion> <!-- Seccion Exp. Laboral -->
-    <app-seccion></app-seccion> <!-- Seccion Estudios -->
-    <app-seccion></app-seccion> <!-- Seccion Proyectos -->
-  </div>
-  <div class="col-lg-4">
-    <app-seccion></app-seccion> <!-- Seccion Skills -->
+  <div class="row">
+    <div class="col-lg-9">
+      <app-seccion type="cards" name="Experiencia Laboral"></app-seccion> <!-- Seccion Exp. Laboral -->
+      <app-seccion type="cards" name="Formación Académica"></app-seccion> <!-- Seccion Estudios -->
+      <app-seccion type="cards" name="Proyectos"></app-seccion> <!-- Seccion Proyectos -->
+    </div>
+    <div class="col-lg-3">
+      <app-seccion type="skills" name="Skills"></app-seccion> <!-- Seccion Skills -->
+    </div>
   </div>
 </div>
 
