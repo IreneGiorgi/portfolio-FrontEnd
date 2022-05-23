@@ -17,12 +17,12 @@
 
   <div class="row">
     <div class="col-lg-9">
-      <app-seccion type="cards" name="Experiencia Laboral"></app-seccion> <!-- Seccion Exp. Laboral -->
-      <app-seccion type="cards" name="Formación Académica"></app-seccion> <!-- Seccion Estudios -->
-      <app-seccion type="cards" name="Proyectos"></app-seccion> <!-- Seccion Proyectos -->
+      <app-seccion type="cards" name="Experiencia Laboral" idSec="expLab" [itemsToShow]="itemsLab"></app-seccion> <!-- Seccion Exp. Laboral -->
+      <app-seccion type="cards" name="Formación Académica" idSec="formEdu" [itemsToShow]="itemsEdu"></app-seccion> <!-- Seccion Estudios -->
+      <app-seccion type="cards" name="Proyectos" idSec="proyectos" [itemsToShow]="itemsProy"></app-seccion> <!-- Seccion Proyectos --> 
     </div>
     <div class="col-lg-3">
-      <app-seccion type="skills" name="Skills"></app-seccion> <!-- Seccion Skills -->
+       <app-seccion type="skills" name="Skills" idSec="skills" [itemsToShow]="itemsSkill"></app-seccion>  <!-- Seccion Skills -->
     </div>
   </div>
 </div>
