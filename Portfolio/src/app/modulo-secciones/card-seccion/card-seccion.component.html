@@ -1,24 +1,100 @@
 <div class="card float-left">
-    <div class="row">
+    <div class="row" *ngIf="modelo.cardImagen != ' '">
         <div class="col-sm-5">
             <img class="d-block w-100 mx-2 my-2"
-                src="https://scontent.feze10-1.fna.fbcdn.net/v/t1.6435-9/50035185_10218622287574678_5153760386385707008_n.jpg?_nc_cat=108&ccb=1-7&_nc_sid=e3f864&_nc_eui2=AeH-Ur3tKfl9ts2fedbn8UXoPr0867v9yUY-vTzru_3JRpRi5rO09usKu0etS3MIovY&_nc_ohc=uJLb8-zRo0YAX_EWXFY&_nc_ht=scontent.feze10-1.fna&oh=00_AT9-FAn9pIKQeVrYTEkE0uXpK9AuqLf9-tuj5BEUEkbNag&oe=62AE493B"
+                src="{{modelo.cardImagen}}"
                 alt="">
         </div>
         <div class="col-sm-7">
             <div class="card-block">
-                <h4><strong>Titulo experiencia</strong></h4>
-                <h5>Empresa</h5>
-                <hr>
-                <p class="">Aca va la descripcion de todo. Lorem ipsum dolor sit amet consectetur adipisicing elit. Qui,
-                    quibusdam. Ut sunt illo dolorem adipisci, nihil nostrum ea ratione excepturi repellat libero et ex
-                    ducimus in nam harum placeat beatae.</p>
+                <h5 class="text-black">
+                    <i class="bi bi-x-circle float-end" (click)="eliminar()"></i>
+                    <i class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
+                    attr.data-bs-target="{{ '#' + modelo.id}}" ></i>
+                </h5>
+                <h4><strong>{{modelo.cardTitulo}}</strong></h4>
+                         
+                
 
-                <span class="badge rounded-pill bg-info mt-auto">Tiempo</span>
-                <span class="badge rounded-pill bg-success mt-auto">Completado</span>
-                <a href="http://www.google.com"><span class="badge bg-secondary float-end">Ver +</span></a>
+                <h5>{{modelo.cardLugar}}</h5>
+                <hr>
+                <p class="">{{modelo.cardDescripcion}}</p>
+
+                <span class="badge rounded-pill bg-info mt-auto">{{modelo.cardDuracion}}</span>
+                <span class="badge rounded-pill bg-primary mt-auto">{{modelo.cardEstado}}</span>
+                <a href="{{modelo.cardInformacion}}"><span class="badge bg-secondary float-end">Ver +</span></a>
             </div>
         </div>
     </div>
 </div>
 <br />
+
+<!-- Modal Editar Card-->
+<div class="modal fade" [id]="modelo.id" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="modalEditarLabel">Editar {{modelo.cardTitulo}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body text-white">
+               
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre: </label>
+                        <input id="nombre" type="text" formControlName="nombre" class="form-control bg-dark text-white">
+                    </div>
+
+                    
+                    <div class="mb-3" *ngIf="modelo.subtype != 'proyectos'">
+                        <label for="lugar" class="form-label">Lugar: </label>
+                        <input id="lugar" type="text" formControlName="lugar" class="form-control bg-dark text-white">
+                    </div>
+                  
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción: </label>
+                        <textarea id="descripcion" type="text" formControlName="descripcion" class="form-control bg-dark text-white">
+                        </textarea>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fechaInicio" class="form-label">Fecha de Inicio: </label>
+                        <input id="fechaInicio" type="date" formControlName="fechaInicio" class="form-control bg-dark text-white">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fechaFin" class="form-label">Fecha de Fin: </label>
+                        <input id="fechaFin" type="date" formControlName="fechaFin" class="form-control bg-dark text-white">
+                    </div>
+
+                    <div class="mb-3" *ngIf="modelo.subtype != 'expLab'">
+                        <label for="estado" class="form-label">Estado: </label>
+                        <select class="form-select bg-dark text-white" id="estado" formControlName="estado">
+                            <option value="COMPLETADO">Completado</option>
+                            <option value="EN CURSO">En curso</option>
+                            <option value="NO FINALIZADO">No finalizado</option>
+                          </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="informacion" class="form-label">Información Adicional: </label>
+                        <input id="informacion" type="text" formControlName="informacion" class="form-control bg-dark text-white" placeholder="URL de la Información adicional">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="imagen" class="form-label">Imagen de referencia: </label>
+                        <input id="imagen" type="text" formControlName="imagen" class="form-control bg-dark text-white" placeholder="URL de la imagen">
+                    </div>
+                    
+                    
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!itemForm.valid" >Editar</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- Modal Editar Card Fin-->
