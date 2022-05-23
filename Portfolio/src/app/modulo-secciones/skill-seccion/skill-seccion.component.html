@@ -1,1 +1,78 @@
-<p>skill-seccion works!</p>
+<div *ngIf="name != undefined && name != ''">
+    <h5 class="text-white">
+        <i class="bi bi-x-circle float-end" (click)="eliminar()"></i>
+        <i class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#' + id}}" ></i>
+    </h5>
+
+    <h6 class="text-white">{{name}}</h6>
+  
+
+    <div class="progress">
+        <div [ngClass]="obtenerClases()" 
+            class="progress-bar progress-bar-striped" 
+            role="progressbar"
+            [style]="obtenerEstilo()" 
+            attr.aria-valuenow="{{percentage}}" 
+            aria-valuemin="0" 
+            aria-valuemax="100"
+        >
+        </div>
+
+        <div *ngIf="percentage != '100'" 
+            class="progress-bar bg-secondary" 
+            role="progressbar"
+            [style]="obtenerEstiloRestante()" 
+            attr.aria-valuenow="obtenerValorRestante()" 
+            aria-valuemin="0"
+            aria-valuemax="100"
+        >
+        </div>
+
+
+    </div>
+    <br />
+</div>
+
+<!-- Modal Editar-->
+<div class="modal fade" [id]="id" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="modalEditarLabel">Editar {{name}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body text-white">
+               
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre: </label>
+                        <input id="nombre" type="text" formControlName="nombre" class="form-control bg-dark text-white">
+                    </div>
+
+                   
+                    <div class="mb-3">
+                        <label for="tipoSkill" class="form-label">Tipo de Skill: </label>
+                        <select class="form-select bg-dark text-white" id="tipoSkill" formControlName="tipoSkill">
+                            <option value="soft">Soft Skill</option>
+                            <option value="hard">Hard Skill</option>
+                            <option value="idiomas">Idiomas</option>
+                          </select>
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="nivelSkill" class="form-label">Nivel de Skill: </label>
+                        <input id="nivelSkill" type="number" formControlName="nivelSkill" class="form-control bg-dark text-white" placeholder="Nivel medido en porcentaje" max="100" min="0">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!itemForm.valid" >Editar</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- Modal Editar Fin-->
