@@ -20,10 +20,48 @@
                 <i class="bi bi-linkedin"></i>
             </a>
 
-            <button type="button" class="btn btn-outline-info ms-4 me-1">
-                Login
-            </button>
-            
+            <button type="button" class="btn btn-outline-info ms-4 me-1" data-bs-toggle="modal"
+                data-bs-target="#modalSesion"><i class="bi bi-person-check-fill"></i> Login</button>
+
         </div>
     </div>
 </nav>
+
+<!-- Modal Iniciar Sesión-->
+<div class="modal fade" id="modalSesion" tabindex="-1" aria-labelledby="modalSesionLabel" aria-hidden="true">
+    <div class="modal-dialog modal-md">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="modalSesionLabel">Iniciar Sesión</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+                <div class="modal-body text-white">
+
+                    <button type="button" #closebutton class="close d-none" data-bs-dismiss="modal">&times;</button>
+
+
+                    <div class="input-group flex-nowrap mb-3">
+                        <span class="input-group-text" id="user"><i class="bi bi-person-fill"></i></span>
+                        <input type="text" class="form-control bg-dark text-white" formControlName="user" placeholder="Username"
+                            aria-label="Username" aria-describedby="addon-wrapping">
+                    </div>
+
+                    <div class="input-group flex-nowrap mb-3">
+                        <span class="input-group-text" id="pass"><i class="bi bi-key-fill"></i></span>
+                        <input type="password" class="form-control bg-dark text-white" formControlName="pass" placeholder="Password"
+                            aria-label="Password" aria-describedby="addon-wrapping">
+                    </div>
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="submit" class="btn btn-success"
+                        [disabled]="!itemForm.valid">Ingresar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal Iniciar Sesión Fin-->

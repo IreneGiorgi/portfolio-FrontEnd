@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { BarraRedesComponent } from './barra-redes/barra-redes.component';
 import { PiePaginaComponent } from './pie-pagina/pie-pagina.component';
-
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -11,7 +11,8 @@ import { PiePaginaComponent } from './pie-pagina/pie-pagina.component';
     PiePaginaComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    ReactiveFormsModule
   ],
   exports:[
     BarraRedesComponent,
