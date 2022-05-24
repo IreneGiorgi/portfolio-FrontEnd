@@ -1,18 +1,66 @@
 <div class="p-4 p-md-5 mb-4 text-white rounded bg-dark"
     style="background-repeat: no-repeat;
        background-size: 100% 100%;
-       background-image: url(https://scontent.feze10-1.fna.fbcdn.net/v/t1.6435-9/104487247_10223521877101354_7932844094982045841_n.jpg?_nc_cat=106&ccb=1-7&_nc_sid=84a396&_nc_eui2=AeF9-2xnaWbRpPhlt1_tBfD2LTrkBF7NqgYtOuQEXs2qBggv0fQYWXyI4SZ_A44OTrg&_nc_ohc=p9X0jpFLW9oAX85i4yd&_nc_ht=scontent.feze10-1.fna&oh=00_AT8srF2sCj7DbSxobGqXHCuB8B32oH6obd1bp0-nNPydOg&oe=62AF8A11)">
+       background-image: url({{modelo.fotoBannerPerfil}})">
     <div class="col-md-6 px-0">
         <div class="card" style="width: 18rem;">
-            <img src="https://scontent.feze10-1.fna.fbcdn.net/v/t1.6435-9/92172387_10222660420365474_1429572077697892352_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=0debeb&_nc_eui2=AeGPSUZOY4wAy_hqh_pnB4h7QS0qVkMfONtBLSpWQx842y6W8ZG3Pd5-b0nNJahTJs4&_nc_ohc=ADUlIKrCkvEAX966fdl&tn=oB6eWlNdlhYZ34z7&_nc_ht=scontent.feze10-1.fna&oh=00_AT_Fy3dwt_478QjS7GQ75VqplhhCMIu9uqwJeFvfyguo3w&oe=62AFF7C1"
-                class="card-img-top" alt="...">
+            
+            <img src="{{modelo.fotoPerfil}}"
+                class="card-img-top" alt="">
             <div class="card-body text-light">
-                <h4 class="card-title fw-bolder">Irene Giorgi</h4>
-                <h6 class="card-title fw-bold fst-italic">Full-Stack Developer</h6>
-                <p class="card-text fw-light">🤪👾🎮🥧🤓🍫</p>
-                    <p class="card-text fw-light">Soy media loca, gamer y me encanta sonreír.</p>
+                <h4 class="card-title fw-bolder">{{modelo.nombrePerfil}}</h4>
+                <h6 class="card-title fw-bold fst-italic">{{modelo.tituloPerfil}}</h6>
+                <p class="card-text fw-light">{{modelo.acercaPerfil}}</p>
 
             </div>
+            <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#modalPerfil"><i class="bi bi-pencil-square"></i> Editar información personal</button>
         </div>
     </div>
 </div>
+
+<!-- Modal Editar Informacion Banner-->
+<div class="modal fade" id="modalPerfil" tabindex="-1" aria-labelledby="modalEditarPerfilLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="modalEditarPerfilLabel">Editar información personal</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body text-white">
+               
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre: </label>
+                        <input id="nombre" type="text" formControlName="nombrePerfil" class="form-control bg-dark text-white">
+                    </div>
+                    
+                    <div class="mb-3">
+                        <label for="titulo" class="form-label">Título: </label>
+                        <input id="titulo" type="text" formControlName="tituloPerfil" class="form-control bg-dark text-white" placeholder="Full-Stack Developer">
+                    </div>
+                  
+                    <div class="mb-3">
+                        <label for="descripcion" class="form-label">Descripción: </label>
+                        <textarea id="descripcion" type="text" formControlName="acercaPerfil" class="form-control bg-dark text-white">
+                        </textarea>
+                    </div>
+                  
+                    <div class="mb-3">
+                        <label for="fotoPerfil" class="form-label">Foto de Perfil: </label>
+                        <input id="fotoPerfil" type="text" formControlName="fotoPerfil" class="form-control bg-dark text-white" placeholder="URL de Foto de Perfil">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="fotoBannerPerfil" class="form-label">Foto de Banner: </label>
+                        <input id="fotoBannerPerfil" type="text" formControlName="fotoBannerPerfil" class="form-control bg-dark text-white" placeholder="URL de Foto de Banner">
+                    </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!itemForm.valid" >Editar</button>
+            </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Modal Editar Informacion Banner Fin-->
