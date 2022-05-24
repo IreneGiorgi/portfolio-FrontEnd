@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Portfolio';
+
+  itemsLab: any = [];
+  itemsEdu: any = [];
+  itemsProy: any = [];
+  itemsSkill: any = [];
+  
+
 }

@@ -1,1 +1,110 @@
-<p>seccion works!</p>
+<h3 class="text-white">{{name}} <i class="bi bi-plus-circle" data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#' + idSec}}"></i></h3>
+
+<div *ngIf="type == 'skills'">
+
+    <div class="items" *ngFor="let item of itemsToShow; index as i;">
+        <app-skill-seccion [id]="item.id" [name]="item.name" [percentage]="item.porcentaje" [type]="item.subtype" (delete)="sacarItem(i)"></app-skill-seccion>
+    </div>
+
+</div>
+
+<div *ngIf="type == 'cards'">
+
+    <div class="items" *ngFor="let item of itemsToShow; index as i;">
+        <app-card-seccion [modelo]="item"  (delete)="sacarItem(i)" ></app-card-seccion>
+    </div>
+
+
+
+</div>
+<div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-success" data-bs-toggle="modal" attr.data-bs-target="{{ '#' + idSec}}"><i
+            class="bi bi-plus-circle"></i> Agregar nuevo</button>
+
+</div>
+<br />
+
+
+<!-- Modal Agregar-->
+<div class="modal fade" [id]="idSec" tabindex="-1" aria-labelledby="modalAgregarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content bg-dark">
+            <div class="modal-header">
+                <h5 class="modal-title text-white" id="modalAgregarLabel">Agregar {{name}}</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body text-white">
+               
+                    <div class="mb-3">
+                        <label for="nombre" class="form-label">Nombre: </label>
+                        <input id="nombre" type="text" formControlName="nombre" class="form-control bg-dark text-white">
+                    </div>
+
+                    
+                    <div class="mb-3" *ngIf="idSec != 'skills' && idSec != 'proyectos'">
+                        <label for="lugar" class="form-label">Lugar: </label>
+                        <input id="lugar" type="text" formControlName="lugar" class="form-control bg-dark text-white">
+                    </div>
+                  
+                    <div class="mb-3" *ngIf="idSec != 'skills'">
+                        <label for="descripcion" class="form-label">Descripción: </label>
+                        <textarea id="descripcion" type="text" formControlName="descripcion" class="form-control bg-dark text-white">
+                        </textarea>
+                    </div>
+
+                    <div class="mb-3" *ngIf="idSec != 'skills'">
+                        <label for="fechaInicio" class="form-label">Fecha de Inicio: </label>
+                        <input id="fechaInicio" type="date" formControlName="fechaInicio" class="form-control bg-dark text-white">
+                    </div>
+
+                    <div class="mb-3" *ngIf="idSec != 'skills'">
+                        <label for="fechaFin" class="form-label">Fecha de Fin: </label>
+                        <input id="fechaFin" type="date" formControlName="fechaFin" class="form-control bg-dark text-white">
+                    </div>
+
+                    <div class="mb-3" *ngIf="idSec != 'skills' && idSec != 'expLab'">
+                        <label for="estado" class="form-label">Estado: </label>
+                        <select class="form-select bg-dark text-white" id="estado" formControlName="estado">
+                            <option value="COMPLETADO">Completado</option>
+                            <option value="EN CURSO">En curso</option>
+                            <option value="NO FINALIZADO">No finalizado</option>
+                          </select>
+                    </div>
+
+                    <div class="mb-3" *ngIf="idSec != 'skills'">
+                        <label for="informacion" class="form-label">Información Adicional: </label>
+                        <input id="informacion" type="text" formControlName="informacion" class="form-control bg-dark text-white" placeholder="URL de la Información adicional">
+                    </div>
+
+                    <div class="mb-3" *ngIf="idSec != 'skills'">
+                        <label for="imagen" class="form-label">Imagen de referencia: </label>
+                        <input id="imagen" type="text" formControlName="imagen" class="form-control bg-dark text-white" placeholder="URL de la imagen">
+                    </div>
+
+                    <div class="mb-3" *ngIf="idSec == 'skills'">
+                        <label for="tipoSkill" class="form-label">Tipo de Skill: </label>
+                        <select class="form-select bg-dark text-white" id="tipoSkill" formControlName="tipoSkill">
+                            <option value="soft">Soft Skill</option>
+                            <option value="hard">Hard Skill</option>
+                            <option value="idiomas">Idiomas</option>
+                          </select>
+                    </div>
+
+                    <div class="mb-3" *ngIf="idSec == 'skills'">
+                        <label for="nivelSkill" class="form-label">Nivel de Skill: </label>
+                        <input id="nivelSkill" type="number" formControlName="nivelSkill" class="form-control bg-dark text-white" placeholder="Nivel medido en porcentaje" max="100" min="0">
+                    </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="submit" class="btn btn-success" data-bs-dismiss="modal" [disabled]="!itemForm.valid" >Añadir</button>
+            </div>
+            </form>
+
+        </div>
+    </div>
+</div>
+<!-- Modal Agregar Fin-->
