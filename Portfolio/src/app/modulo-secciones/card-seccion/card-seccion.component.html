@@ -8,9 +8,9 @@
         <div class="col-sm-7">
             <div class="card-block">
                 <h5 class="text-black">
-                    <i class="bi bi-x-circle float-end" (click)="eliminar()"></i>
-                    <i class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
-                    attr.data-bs-target="{{ '#' + modelo.id}}" ></i>
+                    <i *ngIf="auth.isLoggedIn()" class="bi bi-x-circle float-end" (click)="eliminar()"></i>
+                    <i *ngIf="auth.isLoggedIn()" class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
+                    attr.data-bs-target="{{ '#card-' + modelo.id}}" ></i>
                 </h5>
                 <h4><strong>{{modelo.cardTitulo}}</strong></h4>
                          
@@ -22,7 +22,7 @@
 
                 <span class="badge rounded-pill bg-info mt-auto">{{modelo.cardDuracion}}</span>
                 <span class="badge rounded-pill bg-primary mt-auto">{{modelo.cardEstado}}</span>
-                <a href="{{modelo.cardInformacion}}"><span class="badge bg-secondary float-end">Ver +</span></a>
+                <a *ngIf="modelo.cardInformacion && modelo.cardInformacion != ''" href="{{modelo.cardInformacion}}"><span class="badge bg-secondary float-end">Ver +</span></a>
             </div>
         </div>
     </div>
@@ -30,7 +30,7 @@
 <br />
 
 <!-- Modal Editar Card-->
-<div class="modal fade" [id]="modelo.id" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+<div class="modal fade" [id]="'card-'+ modelo.id" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bg-dark">
             <div class="modal-header">

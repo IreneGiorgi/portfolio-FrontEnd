@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AutenticatorService } from 'src/app/servicios/autenticator.service';
 
 @Component({
   selector: 'app-barra-redes',
@@ -17,11 +18,13 @@ export class BarraRedesComponent implements OnInit {
   @ViewChild('closebutton') closebutton: any;
 
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, public auth: AutenticatorService) { }
 
   onSubmit() {
     //this.user = this.itemForm.value.user
     //this.pass = this.itemForm.value.pass
+
+    this.auth.login(this.itemForm.value.user, this.itemForm.value.pass);
     this.closebutton.nativeElement.click();
 
 

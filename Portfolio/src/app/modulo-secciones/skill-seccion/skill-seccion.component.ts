@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AutenticatorService } from 'src/app/servicios/autenticator.service';
+import { SeccionService } from 'src/app/servicios/seccion.service';
 
 @Component({
   selector: 'app-skill-seccion',
@@ -20,7 +22,7 @@ export class SkillSeccionComponent implements OnInit {
     nivelSkill:[ this.percentage, Validators.compose([Validators.max(100), Validators.min(0)])]
   })
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, public auth:AutenticatorService, private seccionService: SeccionService) { }
 
   onSubmit() {
 
@@ -28,6 +30,12 @@ export class SkillSeccionComponent implements OnInit {
     this.type = this.itemForm.value.tipoSkill
     this.percentage = this.itemForm.value.nivelSkill
 
+    this.seccionService.editSeccionItem(this.id, {
+      id: this.id, 
+      name: this.name,
+      subtype: this.type,
+      porcentaje: this.percentage
+    })
   }
 
   ngOnInit(): void {

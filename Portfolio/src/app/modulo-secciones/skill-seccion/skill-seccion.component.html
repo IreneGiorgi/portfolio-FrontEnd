@@ -1,8 +1,8 @@
 <div *ngIf="name != undefined && name != ''">
     <h5 class="text-white">
-        <i class="bi bi-x-circle float-end" (click)="eliminar()"></i>
-        <i class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
-        attr.data-bs-target="{{ '#' + id}}" ></i>
+        <i *ngIf="auth.isLoggedIn()" class="bi bi-x-circle float-end" (click)="eliminar()"></i>
+        <i *ngIf="auth.isLoggedIn()" class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#skills-' + id}}" ></i>
     </h5>
 
     <h6 class="text-white">{{name}}</h6>
@@ -35,7 +35,7 @@
 </div>
 
 <!-- Modal Editar-->
-<div class="modal fade" [id]="id" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
+<div class="modal fade" [id]="'skills-'+ id" tabindex="-1" aria-labelledby="modalEditarLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content bg-dark">
             <div class="modal-header">

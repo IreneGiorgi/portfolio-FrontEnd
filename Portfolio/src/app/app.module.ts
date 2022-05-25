@@ -8,6 +8,13 @@ import { ModuloHomeModule } from './modulo-home/modulo-home.module'
 import { ModuloSeccionesModule } from './modulo-secciones/modulo-secciones.module';
 import { ModuloUtilitarioModule } from './modulo-utilitario/modulo-utilitario.module';
 
+import { HttpClientModule, HttpClient } from '@angular/common/http';
+import { AutenticatorService } from './servicios/autenticator.service';
+import { ServiciosModule } from './servicios/servicios.module';
+import { ProfileService } from './servicios/profile.service';
+import { SeccionService } from './servicios/seccion.service';
+
+
 @NgModule({
   declarations: [
     AppComponent
@@ -17,9 +24,11 @@ import { ModuloUtilitarioModule } from './modulo-utilitario/modulo-utilitario.mo
     AppRoutingModule,
     ModuloHomeModule,
     ModuloSeccionesModule,
-    ModuloUtilitarioModule
+    ModuloUtilitarioModule,
+    HttpClientModule,
+    ServiciosModule
   ],
-  providers: [],
+  providers: [HttpClientModule, AutenticatorService, ProfileService, SeccionService],
   bootstrap: [AppComponent]
 })
 

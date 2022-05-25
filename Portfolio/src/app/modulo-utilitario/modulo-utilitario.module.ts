@@ -4,6 +4,8 @@ import { BarraRedesComponent } from './barra-redes/barra-redes.component';
 import { PiePaginaComponent } from './pie-pagina/pie-pagina.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
+import { AutenticatorService } from '../servicios/autenticator.service';
+
 
 @NgModule({
   declarations: [
@@ -12,12 +14,15 @@ import { ReactiveFormsModule } from '@angular/forms';
   ],
   imports: [
     CommonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
   ],
   exports:[
     BarraRedesComponent,
     PiePaginaComponent,
     CommonModule
+  ],
+  providers: [
+    AutenticatorService
   ]
 })
 export class ModuloUtilitarioModule { }

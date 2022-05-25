@@ -1,5 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AutenticatorService } from 'src/app/servicios/autenticator.service';
+import { ProfileService } from 'src/app/servicios/profile.service';
 
 
 @Component({
@@ -8,7 +10,7 @@ import { FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./banner.component.css']
 })
 
-export class BannerComponent implements OnInit {
+export class BannerComponent implements OnInit, OnChanges {
 
   @Input() modelo: {
     id: string,
@@ -18,13 +20,13 @@ export class BannerComponent implements OnInit {
     tituloPerfil: string,
     acercaPerfil: string
   } = {
-    id: '',
-    fotoBannerPerfil: '',
-    fotoPerfil: '',
-    nombrePerfil: '',
-    tituloPerfil: '',
-    acercaPerfil: ''
-  }
+      id: '',
+      fotoBannerPerfil: '',
+      fotoPerfil: '',
+      nombrePerfil: '',
+      tituloPerfil: '',
+      acercaPerfil: ''
+    }
 
   itemForm = this.fb.group({
     fotoBannerPerfil: ['', Validators.required],
@@ -34,7 +36,25 @@ export class BannerComponent implements OnInit {
     acercaPerfil: ['', Validators.required]
   })
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb: FormBuilder, public auth: AutenticatorService, private profileService: ProfileService) { }
+
+
+  ngOnChanges(changes: SimpleChanges): void {
+
+    if (this.modelo) {
+      this.itemForm = this.fb.group({
+        fotoBannerPerfil: [this.modelo.fotoBannerPerfil || '', Validators.required],
+        fotoPerfil: [this.modelo.fotoPerfil || '', Validators.required],
+        nombrePerfil: [this.modelo.nombrePerfil || '', Validators.required],
+        tituloPerfil: [this.modelo.tituloPerfil || '', Validators.required],
+        acercaPerfil: [this.modelo.acercaPerfil || '', Validators.required]
+      })
+
+    }
+
+
+
+  }
 
   onSubmit() {
 
@@ -43,15 +63,24 @@ export class BannerComponent implements OnInit {
     this.modelo.nombrePerfil = this.itemForm.value.nombrePerfil
     this.modelo.tituloPerfil = this.itemForm.value.tituloPerfil
     this.modelo.acercaPerfil = this.itemForm.value.acercaPerfil
+
+    console.log('Sending this model: ', this.modelo);
+
+    this.profileService.editProfileInfo(this.modelo.id, this.modelo)
+
   }
 
   ngOnInit(): void {
-    this.itemForm = this.fb.group({
-      fotoBannerPerfil: [this.modelo.fotoBannerPerfil, Validators.required],
-      fotoPerfil: [this.modelo.fotoPerfil, Validators.required],
-      nombrePerfil: [this.modelo.nombrePerfil, Validators.required],
-      tituloPerfil: [this.modelo.tituloPerfil, Validators.required],
-      acercaPerfil: [this.modelo.acercaPerfil, Validators.required]       
-    })
+  }
+
+  getFotoBanner() {
+    return (this.modelo && this.modelo.fotoBannerPerfil ? this.modelo.fotoBannerPerfil : ' ')
+  }
+
+  obtenerEstiloBanner() {
+    return `
+      background-repeat: no-repeat;
+      background-size: 100% 100%;
+      background-image: url(${this.getFotoBanner()})`
   }
 }
