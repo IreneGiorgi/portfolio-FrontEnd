@@ -1,4 +1,4 @@
-<h3 class="text-white">{{name}} <i class="bi bi-plus-circle" data-bs-toggle="modal"
+<h3 class="text-white">{{name}} <i *ngIf="auth.isLoggedIn()" class="bi bi-plus-circle" data-bs-toggle="modal"
         attr.data-bs-target="{{ '#' + idSec}}"></i></h3>
 
 <div *ngIf="type == 'skills'">
@@ -19,7 +19,7 @@
 
 </div>
 <div class="d-flex justify-content-center">
-    <button type="button" class="btn btn-success" data-bs-toggle="modal" attr.data-bs-target="{{ '#' + idSec}}"><i
+    <button *ngIf="auth.isLoggedIn()" type="button" class="btn btn-success" data-bs-toggle="modal" attr.data-bs-target="{{ '#' + idSec}}"><i
             class="bi bi-plus-circle"></i> Agregar nuevo</button>
 
 </div>

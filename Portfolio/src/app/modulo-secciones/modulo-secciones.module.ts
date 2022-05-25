@@ -5,6 +5,7 @@ import { SkillSeccionComponent } from './skill-seccion/skill-seccion.component';
 import { ReactiveFormsModule } from '@angular/forms';
 
 import { SeccionComponent } from './seccion/seccion.component';
+import { AutenticatorService } from '../servicios/autenticator.service';
 
 
 
@@ -20,6 +21,10 @@ import { SeccionComponent } from './seccion/seccion.component';
   ],
   exports: [
     SeccionComponent, CommonModule
+  ],
+  providers:[
+    AutenticatorService
   ]
+
 })
 export class ModuloSeccionesModule { }

@@ -1,5 +1,7 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { AutenticatorService } from 'src/app/servicios/autenticator.service';
+import { SeccionService } from 'src/app/servicios/seccion.service';
 
 @Component({
   selector: 'app-card-seccion',
@@ -48,7 +50,7 @@ export class CardSeccionComponent implements OnInit {
 
 
 
-  constructor(private fb:FormBuilder) { }
+  constructor(private fb:FormBuilder, public auth: AutenticatorService, private seccionService: SeccionService) { }
 
   onSubmit() {
 
@@ -62,6 +64,7 @@ export class CardSeccionComponent implements OnInit {
     this.modelo.cardInformacion = this.itemForm.value.informacion
     this.modelo.cardImagen = this.itemForm.value.imagen
 
+    this.seccionService.editSeccionItem(this.modelo.id, this.modelo)
   }
 
   ngOnInit(): void {

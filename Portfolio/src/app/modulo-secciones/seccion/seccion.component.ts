@@ -1,6 +1,8 @@
 import { Component, Input, OnInit } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
+import { AutenticatorService } from 'src/app/servicios/autenticator.service';
+import { SeccionService } from 'src/app/servicios/seccion.service';
 
 
 @Component({
@@ -24,12 +26,12 @@ export class SeccionComponent implements OnInit {
     fechaFin: [''],
     informacion: [''],
     imagen: [''],
-    estado:[''],
-    tipoSkill:[''],
-    nivelSkill:['', Validators.compose([Validators.max(100), Validators.min(0)])]
+    estado: [''],
+    tipoSkill: [''],
+    nivelSkill: ['', Validators.compose([Validators.max(100), Validators.min(0)])]
   })
 
-  constructor(private fb: FormBuilder) { }
+  constructor(private fb: FormBuilder, public auth: AutenticatorService, private seccionService: SeccionService) { }
 
   ngOnInit(): void {
   }
@@ -38,22 +40,22 @@ export class SeccionComponent implements OnInit {
 
     let nuevoItem: any;
 
-    if (this.idSec != 'skills') {
-
-      nuevoItem = {
-        id: this.idSec + this.randomNumber(100, 100000),
-        subtype: this.idSec,
-        cardImagen: this.itemForm.value.imagen,
-        cardTitulo: this.itemForm.value.nombre,
-        cardLugar: this.itemForm.value.lugar,
-        cardDescripcion: this.itemForm.value.descripcion,
-        cardDuracion:  `${this.itemForm.value.fechaInicio} / ${this.itemForm.value.fechaFin || ' Actualidad'}`,
-        cardFechaInicio: this.itemForm.value.fechaInicio,
-        cardFechaFin: this.itemForm.value.fechaFin,
-        cardInformacion: this.itemForm.value.informacion
-      }
-
+    nuevoItem = {
+      id: this.idSec + this.randomNumber(100, 100000),
+      type: 'card',
+      subtype: this.idSec,
+      cardImagen: this.itemForm.value.imagen,
+      cardTitulo: this.itemForm.value.nombre,
+      cardLugar: this.itemForm.value.lugar,
+      cardDescripcion: this.itemForm.value.descripcion,
+      cardDuracion: `${this.itemForm.value.fechaInicio} / ${this.itemForm.value.fechaFin || ' Actualidad'}`,
+      cardFechaInicio: this.itemForm.value.fechaInicio,
+      cardFechaFin: this.itemForm.value.fechaFin,
+      cardInformacion: this.itemForm.value.informacion,
+      name: this.itemForm.value.nombre,
+      porcentaje: this.itemForm.value.nivelSkill
     }
+
 
 
     if (this.idSec == 'formEdu') {
@@ -68,15 +70,14 @@ export class SeccionComponent implements OnInit {
 
     }
     else if (this.idSec == 'skills') {
-      nuevoItem = {
-        id: 'skills-' + this.randomNumber(100, 100000),
-        name: this.itemForm.value.nombre,
-        subtype: this.itemForm.value.tipoSkill,
-        porcentaje: this.itemForm.value.nivelSkill
-      }
+      nuevoItem.type = 'skills'
+      nuevoItem.subtype = this.itemForm.value.tipoSkill
     }
 
-    this.itemsToShow.push(nuevoItem);
+
+    this.seccionService.addSeccionItem(nuevoItem).subscribe(obj => {
+      this.itemsToShow.push(nuevoItem);
+    })
 
 
   }
@@ -87,8 +88,9 @@ export class SeccionComponent implements OnInit {
   }
 
   sacarItem(ind: Number) {
-    console.log('Item indice: '+ ind);
-    this.itemsToShow.splice(ind, 1);
+    this.seccionService.deleteSeccionItem(this.itemsToShow[Number(ind)].id).subscribe(obj =>{
+      this.itemsToShow.splice(ind, 1);
+    })
   }
 
 }
