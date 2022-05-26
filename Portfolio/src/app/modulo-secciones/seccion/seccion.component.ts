@@ -41,7 +41,7 @@ export class SeccionComponent implements OnInit {
     let nuevoItem: any;
 
     nuevoItem = {
-      id: this.idSec + this.randomNumber(100, 100000),
+      //id: this.idSec + this.randomNumber(100, 100000),
       type: 'card',
       subtype: this.idSec,
       cardImagen: this.itemForm.value.imagen,
@@ -76,6 +76,7 @@ export class SeccionComponent implements OnInit {
 
 
     this.seccionService.addSeccionItem(nuevoItem).subscribe(obj => {
+      nuevoItem.id = obj.id
       this.itemsToShow.push(nuevoItem);
     })
 
