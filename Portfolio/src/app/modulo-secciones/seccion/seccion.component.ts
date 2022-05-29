@@ -1,6 +1,7 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, SimpleChanges } from '@angular/core';
 
 import { FormBuilder, Validators } from '@angular/forms';
+import { Observable, Subscription } from 'rxjs';
 import { AutenticatorService } from 'src/app/servicios/autenticator.service';
 import { SeccionService } from 'src/app/servicios/seccion.service';
 
@@ -18,6 +19,13 @@ export class SeccionComponent implements OnInit {
 
   @Input() itemsToShow: any = [];
 
+  private eventsSubscription!: Subscription;
+
+  @Input()
+events!: Observable<void>;
+
+
+
   itemForm = this.fb.group({
     nombre: ['', Validators.required],
     lugar: [''],
@@ -31,9 +39,36 @@ export class SeccionComponent implements OnInit {
     nivelSkill: ['', Validators.compose([Validators.max(100), Validators.min(0)])]
   })
 
-  constructor(private fb: FormBuilder, public auth: AutenticatorService, private seccionService: SeccionService) { }
+  constructor(private fb: FormBuilder, public auth: AutenticatorService, private seccionService: SeccionService) { 
+  }
+
+
+
+  sortSkills() {
+
+
+
+    if (this.idSec == 'skills' && this.itemsToShow) {
+
+      this.itemsToShow = this.itemsToShow.sort( (a: any, b: any) => {
+        let x = a.subtype;
+        let y = b.subtype;
+        if (x < y) {return -1};
+        if (x > y) {return 1};
+        return 0;
+      });
+
+    }
+
+
+  }
 
   ngOnInit(): void {
+
+    if (this.events) {
+      this.eventsSubscription = this.events.subscribe(() => this.sortSkills());
+    }
+
   }
 
   onSubmit() {
@@ -75,10 +110,21 @@ export class SeccionComponent implements OnInit {
     }
 
 
-    this.seccionService.addSeccionItem(nuevoItem).subscribe(obj => {
-      nuevoItem.id = obj.id
-      this.itemsToShow.push(nuevoItem);
-    })
+    this.seccionService.addSeccionItem(nuevoItem).subscribe(
+      (response) => {
+
+        nuevoItem.id = response.id
+        this.itemsToShow.push(nuevoItem);
+        this.sortSkills();
+
+      },
+      (error) => {
+
+        console.log('Error happen: ', error);
+        alert('Ocurrió un error al guardar');
+        
+      }
+    )
 
 
   }
@@ -89,9 +135,26 @@ export class SeccionComponent implements OnInit {
   }
 
   sacarItem(ind: Number) {
-    this.seccionService.deleteSeccionItem(this.itemsToShow[Number(ind)].id, this.itemsToShow[Number(ind)]).subscribe(obj =>{
-      this.itemsToShow.splice(ind, 1);
-    })
+    this.seccionService.deleteSeccionItem(this.itemsToShow[Number(ind)].id, this.itemsToShow[Number(ind)]).subscribe(
+      (response) => {
+
+        this.itemsToShow.splice(ind, 1);
+        this.sortSkills();
+
+
+      },
+      (error) => {
+
+        console.log('Error happen: ', error);
+        alert('Ocurrió un error al eliminar');
+        
+      }
+    )
+        
+  }
+
+  ngOnDestroy() {
+    this.eventsSubscription.unsubscribe();
   }
 
 }

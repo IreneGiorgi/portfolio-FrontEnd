@@ -67,9 +67,16 @@ export class BannerComponent implements OnInit, OnChanges {
     console.log('Sending this model: ', this.modelo);
 
     this.profileService.editProfileInfo(this.modelo.id, this.modelo)
-    .subscribe(req => {
+    .subscribe(
+      (response) => {
+      },
+      (error) => {
 
-    });
+        console.log('Error happen: ', error);
+        alert('Ocurrió un error al editar, los cambios realizados no serán guardados');
+        
+      }
+    );
 
   }
 

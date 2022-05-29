@@ -10,6 +10,8 @@ import { AutenticatorService } from 'src/app/servicios/autenticator.service';
 
 export class BarraRedesComponent implements OnInit {
 
+  hasUserError = false
+
   itemForm = this.fb.group({
     user: ['', Validators.required],
     pass: ['', Validators.required]
@@ -24,8 +26,16 @@ export class BarraRedesComponent implements OnInit {
     //this.user = this.itemForm.value.user
     //this.pass = this.itemForm.value.pass
 
-    this.auth.login(this.itemForm.value.user, this.itemForm.value.pass);
-    this.closebutton.nativeElement.click();
+    this.hasUserError = false;
+
+    this.auth.login(this.itemForm.value.user, this.itemForm.value.pass).subscribe(
+      (response) => {
+        this.closebutton.nativeElement.click();
+      },
+      (error) => {
+        this.hasUserError = true;
+      }
+    );
 
 
 

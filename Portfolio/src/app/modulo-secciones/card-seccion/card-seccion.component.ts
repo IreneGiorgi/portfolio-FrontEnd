@@ -65,11 +65,18 @@ export class CardSeccionComponent implements OnInit {
     this.modelo.cardImagen = this.itemForm.value.imagen
 
     console.log('Submitting edit of item with id: '+ this.modelo.id);
+    
     this.seccionService.editSeccionItem(this.modelo.id, this.modelo)
-    .subscribe(obj => {
-      console.log('Response received: '+ obj);
-    })
+    .subscribe(
+      (response) => {
+      },
+      (error) => {
 
+        console.log('Error happen: ', error);
+        alert('Ocurrió un error al editar, los cambios realizados no serán guardados');
+        
+      }
+    )
   }
 
   ngOnInit(): void {

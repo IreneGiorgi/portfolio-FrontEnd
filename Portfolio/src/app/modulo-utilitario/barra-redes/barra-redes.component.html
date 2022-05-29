@@ -1,22 +1,22 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container">
 
-        <a class="navbar-brand me-2" href="https://argentinaprograma.inti.gob.ar/">
+        <a class="navbar-brand me-2" href="https://argentinaprograma.inti.gob.ar/" target="_blank">
             <i class="bi bi-terminal-fill"></i>
         </a>
 
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-                <a class="nav-link" href="https://argentinaprograma.inti.gob.ar/">Arg. Programa<br/> #YoProgramo</a>
+                <a class="nav-link" href="https://argentinaprograma.inti.gob.ar/" target="_blank">Arg. Programa<br/> #YoProgramo</a>
             </li>
         </ul>
 
         <div class="d-flex align-items-center">
-            <a class="btn btn-dark px-3" href="https://github.com/IreneGiorgi" role="button">
+            <a class="btn btn-dark px-3" href="https://github.com/IreneGiorgi" target="_blank" role="button">
                 <i class="bi bi-github"></i>
             </a>
 
-            <a class="btn btn-dark px-3" href="https://www.linkedin.com/in/irene-giorgi-fern%C3%A1ndez/" role="button">
+            <a class="btn btn-dark px-3" href="https://www.linkedin.com/in/irene-giorgi-fern%C3%A1ndez/" target="_blank" role="button">
                 <i class="bi bi-linkedin"></i>
             </a>
 
@@ -46,6 +46,13 @@
                 <div class="modal-body text-white">
 
                     <button type="button" #closebutton class="close d-none" data-bs-dismiss="modal">&times;</button>
+                     
+                    <div *ngIf="hasUserError" class="alert alert-danger d-flex align-items-center" role="alert">
+                        <span class="bi flex-shrink-0 me-2" width="24" height="24" role="img" aria-label="Danger:"><i class="bi bi-exclamation-octagon-fill"></i></span>
+                        <div>
+                          Usuario o contraseña incorrecta
+                        </div>
+                      </div>
 
 
                     <div class="input-group flex-nowrap mb-3">
@@ -65,7 +72,7 @@
                 <div class="modal-footer">
                     <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal">Cancelar</button>
                     <button type="submit" class="btn btn-success"
-                        [disabled]="!itemForm.valid">Ingresar</button>
+                        [disabled]="!itemForm.valid">Ingresar</button>                        
                 </div>
             </form>
         </div>

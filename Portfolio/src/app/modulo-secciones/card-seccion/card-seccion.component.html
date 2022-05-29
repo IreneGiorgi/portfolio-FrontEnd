@@ -8,7 +8,8 @@
         <div class="col-sm-7">
             <div class="card-block">
                 <h5 class="text-black">
-                    <i *ngIf="auth.isLoggedIn()" class="bi bi-x-circle float-end" (click)="eliminar()"></i>
+                    <i *ngIf="auth.isLoggedIn()" class="bi bi-x-circle float-end" data-bs-toggle="modal"
+                    attr.data-bs-target="{{ '#eliminarCard-' + modelo.id}}"></i>
                     <i *ngIf="auth.isLoggedIn()" class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
                     attr.data-bs-target="{{ '#card-' + modelo.id}}" ></i>
                 </h5>
@@ -22,7 +23,8 @@
 
                 <span class="badge rounded-pill bg-info mt-auto">{{modelo.cardDuracion}}</span>
                 <span class="badge rounded-pill bg-primary mt-auto">{{modelo.cardEstado}}</span>
-                <a *ngIf="modelo.cardInformacion && modelo.cardInformacion != ''" href="{{modelo.cardInformacion}}"><span class="badge bg-secondary float-end">Ver +</span></a>
+                <a *ngIf="modelo.cardInformacion && modelo.cardInformacion != ''"data-bs-toggle="modal"
+                attr.data-bs-target="{{ '#verMasCard-' + modelo.id}}"><span class="badge bg-secondary float-end">Ver +</span></a>
             </div>
         </div>
     </div>
@@ -98,3 +100,45 @@
     </div>
 </div>
 <!-- Modal Editar Card Fin-->
+
+<!-- Modal Eliminar-->
+<div class="modal fade" [id]="'eliminarCard-'+ modelo.id" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+        <h5 class="modal-title text-white" id="modalEliminarLabel">Eliminar {{modelo.cardTitulo}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-white">
+          <p>¿Está seguro que desea eliminar definitivamente {{modelo.cardTitulo}}?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminar()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Eliminar fin -->
+
+<!-- Modal Ver mas -->
+<div class="modal fade" [id]="'verMasCard-'+ modelo.id" tabindex="-1" aria-labelledby="modalVerMasLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+        <h5 class="modal-title text-white" id="modalVerMasLabel">Ver información adicional: {{modelo.cardTitulo}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-white">
+          <p>Usted va a ser redirigido a: {{modelo.cardInformacion}}</p>
+          <p class="fw-bold">¿Desea continuar?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <a href="{{modelo.cardInformacion}}" target="_blank"><button type="button" class="btn btn-success" data-bs-dismiss="modal">Continuar</button></a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Modal Ver mas fin -->

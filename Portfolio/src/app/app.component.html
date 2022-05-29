@@ -25,7 +25,7 @@
       <app-seccion type="cards" name="Proyectos" idSec="proyectos" [itemsToShow]="itemsProy"></app-seccion> <!-- Seccion Proyectos --> 
     </div>
     <div class="col-lg-3">
-       <app-seccion type="skills" name="Skills" idSec="skills" [itemsToShow]="itemsSkill"></app-seccion>  <!-- Seccion Skills -->
+       <app-seccion type="skills" name="Skills" idSec="skills" [itemsToShow]="itemsSkill"  [events]="eventSort.asObservable()"></app-seccion>  <!-- Seccion Skills -->
     </div>
   </div>
 </div>

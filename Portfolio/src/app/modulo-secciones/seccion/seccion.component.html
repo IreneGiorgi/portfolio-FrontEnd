@@ -12,7 +12,7 @@
 <div *ngIf="type == 'cards'">
 
     <div class="items" *ngFor="let item of itemsToShow; index as i;">
-        <app-card-seccion [modelo]="item"  (delete)="sacarItem(i)" ></app-card-seccion>
+        <app-card-seccion [modelo]="item"  (delete)="sacarItem(i)"></app-card-seccion>
     </div>
 
 
@@ -38,7 +38,7 @@
             <div class="modal-body text-white">
                
                     <div class="mb-3">
-                        <label for="nombre" class="form-label">Nombre: </label>
+                        <label for="nombre" class="form-label">*Nombre:</label>
                         <input id="nombre" type="text" formControlName="nombre" class="form-control bg-dark text-white">
                     </div>
 
@@ -84,7 +84,7 @@
                     </div>
 
                     <div class="mb-3" *ngIf="idSec == 'skills'">
-                        <label for="tipoSkill" class="form-label">Tipo de Skill: </label>
+                        <label for="tipoSkill" class="form-label">*Tipo de Skill: </label>
                         <select class="form-select bg-dark text-white" id="tipoSkill" formControlName="tipoSkill">
                             <option value="soft">Soft Skill</option>
                             <option value="hard">Hard Skill</option>
@@ -93,7 +93,7 @@
                     </div>
 
                     <div class="mb-3" *ngIf="idSec == 'skills'">
-                        <label for="nivelSkill" class="form-label">Nivel de Skill: </label>
+                        <label for="nivelSkill" class="form-label">*Nivel de Skill: </label>
                         <input id="nivelSkill" type="number" formControlName="nivelSkill" class="form-control bg-dark text-white" placeholder="Nivel medido en porcentaje" max="100" min="0">
                     </div>
 

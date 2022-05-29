@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, throwError } from 'rxjs';
+import { Observable, tap, throwError } from 'rxjs';
 
 import * as moment from "moment";
 import { environment } from 'src/environments/environment';
@@ -16,14 +16,17 @@ export class AutenticatorService {
 
 
   login(user: string, password: string) {
-    return this.http.post<any>(environment.backend +'/api/v1/login', { user, password }).subscribe(obj => {
-      this.setSession(obj);
-      return obj;
-    })
+    return this.http.post<any>(environment.backend +'/api/v1/login', { user, password })
+    .pipe(tap(_ => {
+      console.log('Sending to set session with: '+ _);
+      this.setSession(_);
+    }))
   }
 
 
   private setSession(authResult: any) {
+
+
     const expiresAt = moment().add(authResult.expiresIn, 'second');
 
     localStorage.setItem('id_token', authResult.idToken);

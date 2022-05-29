@@ -15,6 +15,7 @@ export class SkillSeccionComponent implements OnInit {
   @Input() percentage = "0"
   @Input() id = ""
   @Output() delete = new EventEmitter<number>()
+  
 
   itemForm = this.fb.group({
     nombre: [ this.name , Validators.required],
@@ -30,15 +31,26 @@ export class SkillSeccionComponent implements OnInit {
     this.type = this.itemForm.value.tipoSkill
     this.percentage = this.itemForm.value.nivelSkill
 
+
+
     this.seccionService.editSeccionItem(this.id, {
       id: this.id, 
       name: this.name,
       type: 'skills',
       subtype: this.type,
       porcentaje: this.percentage
-    }).subscribe(obj => {
+    }).subscribe(
+      (response) => {
 
-    });
+
+      },
+      (error) => {
+
+        console.log('Error happen: ', error);
+        alert('Ocurrió un error al editar, los cambios realizados no serán guardados');
+        
+      }
+    );
   }
 
   ngOnInit(): void {

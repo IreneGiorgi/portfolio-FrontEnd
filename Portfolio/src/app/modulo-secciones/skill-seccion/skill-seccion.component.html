@@ -1,6 +1,7 @@
 <div *ngIf="name != undefined && name != ''">
     <h5 class="text-white">
-        <i *ngIf="auth.isLoggedIn()" class="bi bi-x-circle float-end" (click)="eliminar()"></i>
+        <i *ngIf="auth.isLoggedIn()" class="bi bi-x-circle float-end" data-bs-toggle="modal"
+        attr.data-bs-target="{{ '#eliminarSkill-' + id}}"></i>
         <i *ngIf="auth.isLoggedIn()" class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
         attr.data-bs-target="{{ '#skills-' + id}}" ></i>
     </h5>
@@ -76,3 +77,25 @@
     </div>
 </div>
 <!-- Modal Editar Fin-->
+
+<!-- Modal Eliminar-->
+
+<div class="modal fade" [id]="'eliminarSkill-'+ id" tabindex="-1" aria-labelledby="modalEliminarLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content bg-dark">
+        <div class="modal-header">
+        <h5 class="modal-title text-white" id="modalEliminarLabel">Eliminar {{name}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body text-white">
+          <p>¿Está seguro que desea eliminar definitivamente {{name}}?</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="eliminar()">Eliminar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!-- Modal Eliminar fin -->
