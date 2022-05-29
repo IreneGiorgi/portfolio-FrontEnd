@@ -89,7 +89,7 @@ export class SeccionComponent implements OnInit {
   }
 
   sacarItem(ind: Number) {
-    this.seccionService.deleteSeccionItem(this.itemsToShow[Number(ind)].id).subscribe(obj =>{
+    this.seccionService.deleteSeccionItem(this.itemsToShow[Number(ind)].id, this.itemsToShow[Number(ind)]).subscribe(obj =>{
       this.itemsToShow.splice(ind, 1);
     })
   }

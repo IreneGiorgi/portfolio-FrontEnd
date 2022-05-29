@@ -33,9 +33,12 @@ export class SkillSeccionComponent implements OnInit {
     this.seccionService.editSeccionItem(this.id, {
       id: this.id, 
       name: this.name,
+      type: 'skills',
       subtype: this.type,
       porcentaje: this.percentage
-    })
+    }).subscribe(obj => {
+
+    });
   }
 
   ngOnInit(): void {

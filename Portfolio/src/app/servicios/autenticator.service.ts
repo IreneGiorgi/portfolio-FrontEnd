@@ -40,6 +40,9 @@ export class AutenticatorService {
     return moment().isBefore(this.getExpiration());
   }
 
+  public getToken() {
+    return localStorage.getItem('id_token');
+  }
 
   getExpiration() {
     const expiration = localStorage.getItem("expires_at") || JSON.stringify(new Date().getTime() / 1000);

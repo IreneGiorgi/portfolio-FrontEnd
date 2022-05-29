@@ -21,8 +21,8 @@ export class SeccionService {
     return this.http.put<any>(environment.backend + '/api/v1/seccion/'+ itemId, this.convertModeloToBackEnd(modelo));
   }
 
-  deleteSeccionItem(itemId: string) {
-    return this.http.delete<any>( environment.backend + '/api/v1/seccion/'+ itemId);
+  deleteSeccionItem(itemId: string, modelo: any) {
+    return this.http.delete<any>( environment.backend + '/api/v1/seccion/' + modelo.type + '/' + itemId);
   }
 
 

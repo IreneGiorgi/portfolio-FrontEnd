@@ -64,7 +64,12 @@ export class CardSeccionComponent implements OnInit {
     this.modelo.cardInformacion = this.itemForm.value.informacion
     this.modelo.cardImagen = this.itemForm.value.imagen
 
+    console.log('Submitting edit of item with id: '+ this.modelo.id);
     this.seccionService.editSeccionItem(this.modelo.id, this.modelo)
+    .subscribe(obj => {
+      console.log('Response received: '+ obj);
+    })
+
   }
 
   ngOnInit(): void {

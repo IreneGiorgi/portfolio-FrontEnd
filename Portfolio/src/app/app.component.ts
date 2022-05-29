@@ -26,6 +26,9 @@ export class AppComponent implements OnInit {
   ngOnInit(): void {
 
     this.profileService.getProfileInfo(environment.user).subscribe(user => {
+      console.log('Recibido user: '+ user);
+
+      
       this.profile = user
     })
 
