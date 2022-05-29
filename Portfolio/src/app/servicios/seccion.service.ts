@@ -37,6 +37,7 @@ export class SeccionService {
       location: modelo.cardLugar,
       description: modelo.cardDescripcion,
       startDate: modelo.cardFechaInicio,
+      status: modelo.cardEstado,
       endDate: modelo.cardFechaFin,
       information: modelo.cardInformacion,
       percentage: modelo.porcentaje,

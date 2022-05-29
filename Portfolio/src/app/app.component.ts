@@ -52,6 +52,7 @@ export class AppComponent implements OnInit {
             subtype: item.subtype,
             cardImagen: item.image,
             cardTitulo: item.name,
+            cardEstado: item.status,
             cardLugar: item.location,
             cardDescripcion: item.description,
             cardDuracion: `${item.startDate} / ${item.endDate || ' Actualidad'}`,
