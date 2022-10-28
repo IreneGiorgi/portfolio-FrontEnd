@@ -1,0 +1,12 @@
+nav {
+    background: linear-gradient(90deg, rgba(16,16,37,1) 0%, rgba(39,25,66,1) 27%, rgba(21,44,57,1) 100%);   
+}
+
+.btn-outline-light {
+    border-color: transparent;
+}
+
+.btn-outline-light:hover {
+    background-color:  transparent;
+    color: deepskyblue;
+}

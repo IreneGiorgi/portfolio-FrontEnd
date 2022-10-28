@@ -3,20 +3,26 @@
       font-size: 1em;
       position: relative;
       margin: 0;
-      padding: 1em;
+      padding-top: 0;
+      padding-right: 1em;
+      padding-bottom: 1em;
+      padding-left: 1em;
       border: none;
       border-top: 1px solid rgba(34, 36, 38, .1);
       box-shadow: none;
-        height: 100%;
+      height: 100%;
   }
   .card {
       font-size: 1em;
       overflow: hidden;
       padding: 5;
-      border: none;
+      border: 1;
       border-radius: .28571429rem;
-      box-shadow: 0 1px 3px 0 #d4d4d5, 0 0 0 1px #d4d4d5;
       margin-top:20px;
-      background-image: linear-gradient(to right, #b1c4e2, #aacce3, #a8d3e1, #add9dc, #b7ded6);
+      background: rgb(16,16,37);
+      background: linear-gradient(90deg, rgba(16,16,37,1) 0%, rgba(39,25,66,1) 27%, rgba(21,44,57,1) 100%);   
+  }
 
+  p, h5, h4, hr {
+    color: white;
   }

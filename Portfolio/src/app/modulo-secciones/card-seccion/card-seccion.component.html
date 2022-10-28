@@ -1,28 +1,31 @@
 <div class="card float-left">
     <div class="row" *ngIf="modelo.cardImagen != ' '">
-        <div class="col-sm-5">
-            <img class="d-block w-100 mx-2 my-2"
+        <div class="col-sm-3">
+            <img class="d-block w-100 mx-3 my-3"
                 src="{{modelo.cardImagen}}"
                 alt="">
+             
         </div>
-        <div class="col-sm-7">
-            <div class="card-block">
-                <h5 class="text-black">
+        <div class="col-sm-9">
+          <div class="card-block">
+            <hr>
+                <h5>
                     <i *ngIf="auth.isLoggedIn()" class="bi bi-x-circle float-end" data-bs-toggle="modal"
                     attr.data-bs-target="{{ '#eliminarCard-' + modelo.id}}"></i>
                     <i *ngIf="auth.isLoggedIn()" class="bi bi-pencil-square float-end me-1" data-bs-toggle="modal"
                     attr.data-bs-target="{{ '#card-' + modelo.id}}" ></i>
                 </h5>
+                
                 <h4><strong>{{modelo.cardTitulo}}</strong></h4>
-                         
+                       
                 
 
                 <h5>{{modelo.cardLugar}}</h5>
                 <hr>
-                <p class="">{{modelo.cardDescripcion}}</p>
+                <p>{{modelo.cardDescripcion}}</p>
 
-                <span class="badge rounded-pill bg-info mt-auto">{{modelo.cardDuracion}}</span>
-                <span class="badge rounded-pill bg-primary mt-auto">{{modelo.cardEstado}}</span>
+                <span class="badge rounded-pill bg-info text-dark mt-auto">{{modelo.cardDuracion}}</span>
+                <span class="badge bg-primary text-dark mt-auto ms-2">{{modelo.cardEstado}}</span>
                 <a *ngIf="modelo.cardInformacion && modelo.cardInformacion != ''"data-bs-toggle="modal"
                 attr.data-bs-target="{{ '#verMasCard-' + modelo.id}}"><span class="badge bg-secondary float-end">Ver +</span></a>
             </div>
@@ -36,7 +39,7 @@
     <div class="modal-dialog modal-lg">
         <div class="modal-content bg-dark">
             <div class="modal-header">
-                <h5 class="modal-title text-white" id="modalEditarLabel">Editar {{modelo.cardTitulo}}</h5>
+                <h5 class="modal-title" id="modalEditarLabel">Editar {{modelo.cardTitulo}}</h5>
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form [formGroup]="itemForm" (ngSubmit)="onSubmit()">
