@@ -16,6 +16,7 @@ export class AppComponent implements OnInit {
 
   itemsLab: any = [];
   itemsEdu: any = [];
+  itemsCertif: any = [];
   itemsProy: any = [];
   itemsSkill: any = [];
 
@@ -70,6 +71,9 @@ export class AppComponent implements OnInit {
             }
             else if (item.subtype == 'expLab') {
               this.itemsLab.push(nItem)
+            }
+            else if (item.subtype == 'certif') {
+              this.itemsCertif.push(nItem)
             }
             else if (item.subtype == 'proyectos') {
               this.itemsProy.push(nItem)
